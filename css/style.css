@@ -78,6 +78,7 @@ html, body {
 }
 
 .accordion {
+    /* Fix width block, because this div have 2px border */
     width: calc(100% - 4px);
     margin: 20px 0;
     padding: 0;
@@ -119,11 +120,13 @@ html, body {
 .text-columns-2 {
     padding: 0 5px;
     column-count: 2;
+    text-align: justify;
 }
 
 .text-columns-3 {
     padding: 0 5px;
     column-count: 3;
+    text-align: justify;
 }
 
 .slider-container {
@@ -189,6 +192,17 @@ html, body {
     padding: 0 5px;
     cursor: pointer;
 }
+
+.image-in-text {
+    display: inline;
+    width: 100%;
+}
+
+
+
+
+
+
 
 @media screen and (min-width: 575px) and (max-width: 992px) {
     .slider-wrapper {
