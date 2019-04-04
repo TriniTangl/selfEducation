@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <!-- Start navbar menu -->
+    <nav class="top-navbar">
+        <ul class="menu">
+            <li>
+                <a data-target="#home" href="javascript:void(0);">Home</a>
+                <ul class="submenu">
+                    <li><a href="javascript:void(0);" data-target="1">Show slide 1</a></li>
+                    <li><a href="javascript:void(0);" data-target="2">Show slide 2</a></li>
+                    <li><a href="javascript:void(0);" data-target="3">Show slide 3</a></li>
+                </ul>
+            </li>
+            <li><a data-target="#register" href="javascript:void(0);">Register</a></li>
+            <li><a data-target="#about" href="javascript:void(0);">About</a></li>
+        </ul>
+    </nav>
+    <!-- End navbar menu -->
+    
+    <!-- Start accordion block -->
+    <div class="accordion">
+        <div class="block" id="home">
+            <div class="block-header active">
+                <h2>Home</h2>
+            </div>
+            <div class="block-body show">
+                <div class="text-columns-2">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut laoreet orci, a pharetra quam. Etiam
+                    eu feugiat enim. Phasellus tincidunt quam interdum, tincidunt diam nec, faucibus magna. Aenean
+                    turpis turpis, malesuada eget ex ut, condimentum vestibulum ipsum. Nam at hendrerit diam. Aliquam
+                    malesuada aliquam elit, vitae scelerisque magna eleifend ut. Fusce et massa non metus vehicula
+                    eleifend. Sed a faucibus nulla. Morbi eu ante a ante porta vulputate vel sed eros. Ut fermentum
+                    mauris et ultrices laoreet. Nunc cursus mattis nunc, ut ultrices turpis tristique iaculis. Aenean id
+                    venenatis mi, a sodales est. Phasellus at dolor et dui faucibus efficitur. Cras aliquet pretium
+                    velit tincidunt bibendum. Donec ultricies nulla dolor.
+                </div>
+                <div class="slider-container">
+                    <button class="button-left"></button>
+                    <div class="slider-wrapper">
+                        <img alt="Image 1" src="img/img-1.jpg">
+                        <img alt="Image 2" src="img/img-2.jpg">
+                        <img alt="Image 3" src="img/img-3.jpg">
+                        <img alt="Image 4" src="img/img-4.jpg">
+                        <img alt="Image 5" src="img/img-5.jpg">
+                    </div>
+                    <button class="button-right"></button>
+                </div>
+                <div class="slider-pagination">
+                </div>
+            </div>
+        </div>
+        <div class="block" id="register">
+            <div class="block-header">
+                <h2>Register</h2>
+            </div>
+            <div class="block-body">Test text 2</div>
+        </div>
+        <div class="block" id="about">
+            <div class="block-header">
+                <h2>About</h2>
+            </div>
+            <div class="block-body">Test text 3</div>
+        </div>
+    </div>
+    <!-- End accordion block -->
+
+</div>
+
+<script src="js/navbar.script.js"></script>
+<script src="js/accordion.script.js"></script>
+<script src="js/slider.script.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

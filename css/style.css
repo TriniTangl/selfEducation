@@ -1,0 +1,222 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 20px auto;
+    font-size: 16px;
+}
+
+.top-navbar {
+    display: block;
+}
+
+.top-navbar ul {
+    padding: 0;
+    list-style: none;
+    border: 1px solid #919191;
+}
+
+.top-navbar ul li {
+    background: #f9f9f9;
+}
+
+.top-navbar ul li a {
+    display: block;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000000;
+}
+
+.top-navbar li a:hover {
+    background: #c3c3c3;
+}
+
+.top-navbar li a:active {
+    background: #afafaf;
+}
+
+.menu {
+    display: flex;
+    width: 300px;
+}
+
+.menu li {
+    width: 100px;
+    text-align: center;
+}
+
+/* Show a submenu when pointing to the item main menu */
+/*
+.menu li:hover ul {
+    display: block;
+}
+*/
+
+.submenu {
+    position: absolute;
+    display: none;
+    float: left;
+    width: 150px;
+    /* Fix 1px margin left, because parent element li have 1px border */
+    margin-left: -1px;
+}
+
+.submenu.hover {
+    display: block;
+}
+
+.submenu li {
+    width: 150px;
+    text-align: left;
+}
+
+.accordion {
+    width: 100%;
+    margin: 20px 0;
+    padding: 0;
+    border-top: 2px solid #919191;
+    border-right: 2px solid #919191;
+    border-left: 2px solid #919191;
+}
+
+.block-header {
+    margin: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-bottom: 2px solid #919191;
+}
+
+.block-header.active {
+    background: #c3c3c3;
+}
+
+.block-header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.block-body {
+    display: none;
+    margin: 0;
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 2px solid #919191;
+}
+
+.block-body.show {
+    display: block;
+}
+
+.text-columns-2 {
+    padding: 0 5px;
+    column-count: 2;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px auto 0 auto;
+}
+
+.slider-wrapper {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    /* Fix width block, because parent element div have 100% width and have 2 children button */
+    max-width: calc(100% - 120px);
+    margin: auto;
+}
+
+.slider-wrapper img {
+    display: block;
+    width: 0;
+    margin: auto;
+    transition: all 0.5s linear;
+    opacity: 0;
+}
+
+.slider-wrapper img.active-slide {
+    width: 100%;
+    opacity: 1;
+}
+
+.button-left, .button-right {
+    width: 50px;
+    height: 75px;
+    margin: auto 0;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.button-left {
+    margin-right: 10px;
+    background: url("../img/left-arrow.png") no-repeat;
+    background-size: cover;
+}
+
+.button-right {
+    margin-left: 10px;
+    background: url("../img/right-arrow.png") no-repeat;
+    background-size: cover;
+}
+
+.slider-pagination {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.slider-pagination input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 575px) and (max-width: 992px) {
+    .slider-wrapper {
+        /* Fix width block, because parent element div have 100% width and have 2 children button */
+        max-width: calc(100% - 80px);
+    }
+    
+    .button-left, .button-right {
+        width: 30px;
+        height: 45px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .slider-wrapper {
+        /* Fix width block, because parent element div have 100% width and have 2 children button */
+        max-width: calc(100% - 50px);
+    }
+    
+    .button-left, .button-right {
+        width: 20px;
+        height: 30px;
+    }
+    
+    .button-left {
+        margin-right: 5px;
+    }
+    
+    .button-right {
+        margin-left: 5px;
+    }
+}
+
+
+
+
