@@ -40,7 +40,9 @@ arrayLinkSubmenu.forEach(function (elem) {
 
 function setSlideUsingSidebarLink() {
     let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch'),
-        targetSlide = Number(this.dataset.target);
-    
+        targetSlide = Number(this.dataset.target),
+        targetBlock = this.parentNode.parentNode.parentNode.querySelector('a').dataset.target;
+
+    document.querySelector(targetBlock + '>.block-header').click();
     arraySliderPaginationElements[targetSlide - 1].click();
 }
