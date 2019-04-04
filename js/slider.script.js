@@ -172,7 +172,14 @@ function setClassActiveSlideForImageUsingSliderPagination(position) {
 
 function scrollImagesByTimer() {
     let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch'),
-        iterator = 0;
+        iterator;
+    
+    for (let i = 0; i < arraySliderPaginationElements.length; i++) {
+        if (arraySliderPaginationElements[i].checked) {
+            iterator = i;
+            break;
+        }
+    }
     
     timerForAutoSwitchImages = setTimeout(tick, 2000);
     
