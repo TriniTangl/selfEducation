@@ -1,11 +1,19 @@
 let arrayImages = document.querySelectorAll('.slider-wrapper>img'),
     buttonLeft = document.querySelector('button.button-left'),
     buttonRight = document.querySelector('button.button-right'),
-    sliderWrapper = arrayImages[0].parentNode,
-    sliderContainer = arrayImages[0].parentNode.parentNode;
+    sliderWrapper = document.querySelector('div.slider-wrapper'),
+    sliderContainer = document.querySelector('div.slider-container'),
+    sliderPaginationContainer = document.querySelector('div.slider-pagination'),
+    timerForAutoSwitchImages;
 
 window.addEventListener('load', callFunctionForOnloadEventWindow, false);
 window.addEventListener('resize', autoResizeSliderArea, false);
+
+sliderContainer.addEventListener('mouseover', stopTimer, false);
+sliderContainer.addEventListener('mouseout', scrollImagesByTimer, false);
+
+sliderPaginationContainer.addEventListener('mouseover', stopTimer, false);
+sliderPaginationContainer.addEventListener('mouseout', scrollImagesByTimer, false);
 
 buttonLeft.addEventListener('click', scrollImagesToLeft, false);
 buttonRight.addEventListener('click', scrollImagesToRight, false);
@@ -117,8 +125,7 @@ function changePlaceImageInSliderList(switchPosition, arrayElements) {
 }
 
 function generateSliderPagination() {
-    let elementPagination = document.createElement('input'),
-        sliderPaginationContainer = document.querySelector('div.slider-pagination');
+    let elementPagination = document.createElement('input');
     
     elementPagination.classList.add('slider-switch');
     elementPagination.name = 'slider-switch-button';
@@ -165,8 +172,9 @@ function setClassActiveSlideForImageUsingSliderPagination(position) {
 
 function scrollImagesByTimer() {
     let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch'),
-        iterator = 0,
-        timerId = setTimeout(tick, 2000);
+        iterator = 0;
+    
+    timerForAutoSwitchImages = setTimeout(tick, 2000);
     
     function tick() {
         arraySliderPaginationElements[iterator].click();
@@ -176,6 +184,10 @@ function scrollImagesByTimer() {
         } else {
             iterator++;
         }
-        timerId = setTimeout(tick, 2000);
+        timerForAutoSwitchImages = setTimeout(tick, 2000);
     }
+}
+
+function stopTimer() {
+    clearTimeout(timerForAutoSwitchImages);
 }

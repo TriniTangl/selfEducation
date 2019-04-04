@@ -121,6 +121,11 @@ html, body {
     column-count: 2;
 }
 
+.text-columns-3 {
+    padding: 0 5px;
+    column-count: 3;
+}
+
 .slider-container {
     display: flex;
     flex-direction: row;
