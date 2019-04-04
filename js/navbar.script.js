@@ -44,5 +44,7 @@ function setSlideUsingSidebarLink() {
         targetBlock = this.parentNode.parentNode.parentNode.querySelector('a').dataset.target;
 
     document.querySelector(targetBlock + '>.block-header').click();
+    stopTimer();
     arraySliderPaginationElements[targetSlide - 1].click();
+    scrollImagesByTimer();
 }
