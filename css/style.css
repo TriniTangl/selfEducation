@@ -117,16 +117,10 @@ html, body {
     display: block;
 }
 
-.text-columns-2 {
+.content-column-2 {
     padding: 0 5px;
+    text-align: justify;
     column-count: 2;
-    text-align: justify;
-}
-
-.text-columns-3 {
-    padding: 0 5px;
-    column-count: 3;
-    text-align: justify;
 }
 
 .slider-container {
@@ -193,16 +187,35 @@ html, body {
     cursor: pointer;
 }
 
-.image-in-text {
-    display: inline;
-    width: 100%;
+.content-column-3 {
+    padding: 0 5px;
+    text-align: justify;
+    column-count: 3;
 }
 
+.image-in-text {
+    display: block;
+    width: 100%;
+    transition: all 1s ease-in;
+    transform: none;
+    border-radius: 0;
+    column-span: none;
+    filter: none;
+    box-shadow: none;
+}
 
+#image-animation-1:hover {
+    transition: all 1s ease-in-out;
+    transform: scaleY(3) translateY(50%);
+    border-radius: 30px;
+    filter: grayscale(100%);
+}
 
-
-
-
+#image-animation-2:hover {
+    transition: all 1s ease-in-out;
+    box-shadow: 20px 20px 20px 5px #696969;
+    transform: scaleX(2) translateX(-30%);
+}
 
 @media screen and (min-width: 575px) and (max-width: 992px) {
     .slider-wrapper {
