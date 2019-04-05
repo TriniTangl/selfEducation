@@ -187,21 +187,101 @@ html, body {
     cursor: pointer;
 }
 
+.form {
+    display: block;
+    padding: 30px 50px;
+    font-size: 16px;
+    color: #000000;
+}
+
+.form-group {
+    margin: 20px 0;
+    display: flex;
+}
+
+.input-label {
+    display: inline-block;
+    width: 10%;
+    margin: auto 0;
+}
+
+.input {
+    display: inline-block;
+    width: 20%;
+    height: 25px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid #696969;
+    outline: none;
+    background: #ffffff;
+    margin: auto 0;
+}
+
+.input:focus {
+    outline: 3px solid #afafaf;
+}
+
+.select {
+    /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
+       Element select don't calculate this parameters to width and height automatically */
+    width: calc(20% + 20px + 2px);
+    height: calc(25px + 20px + 2px);
+    padding-right: 45px;
+    cursor: pointer;
+    background: #ffffff url(../img/select-arrow.png) no-repeat right;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+}
+
+.button-form {
+    height: 37px;
+    padding: 5px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #696969;
+    outline: none;
+    background: #ffffff;
+    margin: 20px auto auto 10%;
+}
+
+.button-form:hover {
+    background: #ebebeb;
+}
+
+.button-form:active {
+    background: #cdcdcd;
+}
+
+.button-form:focus {
+    outline: 3px solid #afafaf;
+}
+
 .content-column-3 {
+    overflow: hidden;
     padding: 0 5px;
     text-align: justify;
     column-count: 3;
 }
 
 .image-in-text {
+    z-index: 999;
     display: block;
     width: 100%;
     transition: all 1s ease-in;
     transform: none;
     border-radius: 0;
+    box-shadow: none;
     column-span: none;
     filter: none;
-    box-shadow: none;
 }
 
 #image-animation-1:hover {
@@ -213,8 +293,8 @@ html, body {
 
 #image-animation-2:hover {
     transition: all 1s ease-in-out;
-    box-shadow: 20px 20px 20px 5px #696969;
     transform: scaleX(2) translateX(-30%);
+    box-shadow: 20px 20px 20px 5px #696969;
 }
 
 @media screen and (min-width: 575px) and (max-width: 992px) {
@@ -226,6 +306,29 @@ html, body {
     .button-left, .button-right {
         width: 30px;
         height: 45px;
+    }
+    
+    .form {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    
+    .input-label {
+        width: 25%;
+    }
+    
+    .input {
+        width: 40%;
+    }
+    
+    .select {
+        /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
+           Element select don't calculate this parameters to width and height automatically */
+        width: calc(40% + 20px + 2px);
+    }
+    
+    .button-form {
+        margin-left: 25%;
     }
 }
 
@@ -247,8 +350,27 @@ html, body {
     .button-right {
         margin-left: 5px;
     }
+    
+    .form {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    
+    .input-label {
+        width: 30%;
+    }
+    
+    .input {
+        width: 60%;
+    }
+    
+    .select {
+        /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
+           Element select don't calculate this parameters to width and height automatically */
+        width: calc(60% + 20px + 2px);
+    }
+    
+    .button-form {
+        margin-left: 30%;
+    }
 }
-
-
-
-
