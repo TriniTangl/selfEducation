@@ -56,7 +56,9 @@ function scrollImagesToLeft() {
             }
             
             dynamicArrayImages[i].classList.remove('active-slide');
+            dynamicArrayImages[i].style = '';
             dynamicArrayImages[i - 1].classList.add('active-slide');
+            dynamicArrayImages[i - 1].style.maxWidth = dynamicArrayImages[i - 1].naturalWidth + 'px';
             for (let j = 0; j < arrayImages.length; j++) {
                 if (arrayImages[j] === dynamicArrayImages[i - 1]) {
                     setActiveElementSliderPagination(j);
@@ -76,8 +78,10 @@ function scrollImagesToRight() {
             }
             
             dynamicArrayImages[i].classList.remove('active-slide');
+            dynamicArrayImages[i].style = '';
             dynamicArrayImages[i + 1].classList.add('active-slide');
-            for (let j = 0; j < arrayImages.length; j++) {
+            dynamicArrayImages[i + 1].style.maxWidth = dynamicArrayImages[i + 1].naturalWidth + 'px';
+                for (let j = 0; j < arrayImages.length; j++) {
                 if (arrayImages[j] === dynamicArrayImages[i + 1]) {
                     setActiveElementSliderPagination(j);
                 }
@@ -166,8 +170,10 @@ function switchImageUsingSliderPagination() {
 function setClassActiveSlideForImageUsingSliderPagination(position) {
     for (let i = 0; i < arrayImages.length; i++) {
         arrayImages[i].classList.remove('active-slide');
+        arrayImages[i].style = '';
     }
     arrayImages[position].classList.add('active-slide');
+    arrayImages[position].style.maxWidth = arrayImages[position].naturalWidth + 'px';
 }
 
 function scrollImagesByTimer() {
