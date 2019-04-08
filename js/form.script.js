@@ -6,51 +6,33 @@ let buttonSubmitForm = document.getElementById('submit-button'),
     inputIdMarried = document.getElementById('married'),
     resultElement = document.getElementById('result');
 
-buttonSubmitForm.addEventListener('click', validationForm, false);
+buttonSubmitForm.addEventListener('click', validateForm, false);
 
-function validationForm() {
-    if (!validationInputIdName()) {
-        inputIdName.nextElementSibling.classList.add('visible');
-        inputIdName.classList.add('invalid');
-    } else {
-        inputIdName.nextElementSibling.classList.remove('visible');
-        inputIdName.classList.remove('invalid');
-    }
+function validateForm() {
+    validateInputIdName() ? disableStyleError(inputIdName) : enableStyleError(inputIdName);
+    validateInputIdEmail() ? disableStyleError(inputIdEmail) : enableStyleError(inputIdEmail);
+    validateInputIdDob() ? disableStyleError(inputIdDob) : enableStyleError(inputIdDob);
     
-    if (!validationInputIdEmail()) {
-        inputIdEmail.nextElementSibling.classList.add('visible');
-        inputIdEmail.classList.add('invalid');
-    } else {
-        inputIdEmail.nextElementSibling.classList.remove('visible');
-        inputIdEmail.classList.remove('invalid');
-    }
-    
-    if (!validationInputIdDob()) {
-        inputIdDob.nextElementSibling.classList.add('visible');
-        inputIdDob.classList.add('invalid');
-    } else {
-        inputIdDob.nextElementSibling.classList.remove('visible');
-        inputIdDob.classList.remove('invalid');
-    }
-    
-    if (validationInputIdName() && validationInputIdEmail() && validationInputIdDob()) {
+    if (validateInputIdName() && validateInputIdEmail() && validateInputIdDob()) {
         outputFormInputValue();
         
-        inputIdName.value = '';
-        inputIdEmail.value = '';
-        inputIdDob.value = '';
+        clearInputField(inputIdName);
+        clearInputField(inputIdEmail);
+        clearInputField(inputIdDob);
+    } else {
+        resultElement.innerHTML = '';
     }
 }
 
-function validationInputIdName() {
+function validateInputIdName() {
     return /^[A-Z]{1}[a-z]{1,9}$/.test(inputIdName.value);
 }
 
-function validationInputIdEmail() {
+function validateInputIdEmail() {
     return /^\w+@+\w{2,}.\w{2,}$/.test(inputIdEmail.value);
 }
 
-function validationInputIdDob() {
+function validateInputIdDob() {
     let dateOfInput = new Date(inputIdDob.value),
         currentDate = new Date();
     
@@ -67,4 +49,18 @@ function outputFormInputValue() {
     stringResult = stringResult + 'Married: ' + inputIdMarried.checked + '\n';
     
     resultElement.innerText = stringResult;
+}
+
+function enableStyleError(element) {
+    element.nextElementSibling.classList.add('visible');
+    element.classList.add('invalid');
+}
+
+function disableStyleError(element) {
+    element.nextElementSibling.classList.remove('visible');
+    element.classList.remove('invalid');
+}
+
+function clearInputField(field) {
+    field.value = '';
 }
