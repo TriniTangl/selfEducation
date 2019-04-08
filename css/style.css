@@ -225,7 +225,7 @@ html, body {
     /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
        Element select don't calculate this parameters to width and height automatically */
     width: calc(20% + 20px + 2px);
-    height: calc(25px + 20px + 2px);
+    height: calc(25px + 10px + 2px);
     padding-right: 45px;
     cursor: pointer;
     background: #ffffff url(../img/select-arrow.png) no-repeat right;
