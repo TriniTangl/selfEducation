@@ -1,4 +1,4 @@
-let arrayImages = document.querySelectorAll('.slider-wrapper>img'),
+let arrayImages = document.querySelectorAll('.slider-wrapper > img'),
     buttonLeft = document.querySelector('button.button-left'),
     buttonRight = document.querySelector('button.button-right'),
     sliderWrapper = document.querySelector('div.slider-wrapper'),
@@ -48,7 +48,7 @@ function autoResizeSliderArea() {
 }
 
 function scrollImagesToLeft() {
-    let dynamicArrayImages = document.querySelectorAll('.slider-wrapper>img');
+    let dynamicArrayImages = document.querySelectorAll('.slider-wrapper > img');
     for (let i = 0; i < dynamicArrayImages.length; i++) {
         if (dynamicArrayImages[i].classList.contains('active-slide')) {
             if (i - 1 <= 0) {
@@ -70,7 +70,7 @@ function scrollImagesToLeft() {
 }
 
 function scrollImagesToRight() {
-    let dynamicArrayImages = document.querySelectorAll('.slider-wrapper>img');
+    let dynamicArrayImages = document.querySelectorAll('.slider-wrapper > img');
     for (let i = dynamicArrayImages.length - 1; i >= 0; i--) {
         if (dynamicArrayImages[i].classList.contains('active-slide')) {
             if (i + 1 === dynamicArrayImages.length - 1) {
@@ -109,7 +109,9 @@ function setClassActiveSlideForImageWhenPageLoad() {
             }
         }
         
-        if (!isElementHaveClass) arrayImages[0].classList.add('active-slide'); // (!isElementHaveClass)
+        if (!isElementHaveClass) { // (!isElementHaveClass)
+            arrayImages[0].classList.add('active-slide');
+        }
         changePlaceImageInSliderList('left', arrayImages);
         setActiveElementSliderPagination(0);
     }
@@ -150,7 +152,7 @@ function setActiveElementSliderPagination(position) {
 
 function switchImageUsingSliderPagination() {
     let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch'),
-        dynamicArrayImages = document.querySelectorAll('.slider-wrapper>img');
+        dynamicArrayImages = document.querySelectorAll('.slider-wrapper > img');
     
     for (let i = 0; i < arraySliderPaginationElements.length; i++) {
         if (arraySliderPaginationElements[i].checked) {

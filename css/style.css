@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -82,9 +83,8 @@ html, body {
     width: calc(100% - 4px);
     margin: 20px 0;
     padding: 0;
-    border-top: 2px solid #919191;
-    border-right: 2px solid #919191;
-    border-left: 2px solid #919191;
+    border: 2px solid #919191;
+    border-bottom: none;
 }
 
 .block-header {
@@ -113,21 +113,29 @@ html, body {
     border-bottom: 2px solid #919191;
 }
 
-.block-body.show {
+.block-body.active {
     display: block;
 }
 
-.content-column-2 {
+.text-column {
+    overflow: hidden;
     padding: 0 5px;
     text-align: justify;
+}
+
+.content-column-2 {
     column-count: 2;
+}
+
+.content-column-3 {
+    column-count: 3;
 }
 
 .slider-container {
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin: 20px auto 0 auto;
+    margin: 20px auto 0;
 }
 
 .slider-wrapper {
@@ -153,7 +161,8 @@ html, body {
     opacity: 1;
 }
 
-.button-left, .button-right {
+.button-left,
+.button-right {
     width: 50px;
     height: 75px;
     margin: auto 0;
@@ -161,18 +170,17 @@ html, body {
     cursor: pointer;
     border: none;
     outline: none;
+    background: url("../img/arrow-button.png") no-repeat;
+    background-size: cover;
 }
 
 .button-left {
     margin-right: 10px;
-    background: url("../img/left-arrow.png") no-repeat;
-    background-size: cover;
 }
 
 .button-right {
     margin-left: 10px;
-    background: url("../img/right-arrow.png") no-repeat;
-    background-size: cover;
+    transform: rotate(180deg)
 }
 
 .slider-pagination {
@@ -263,7 +271,7 @@ html, body {
     display: inline-block;
 }
 
-.button-form {
+#submit-button {
     height: 37px;
     margin: 20px auto auto 10%;
     padding: 5px 25px;
@@ -274,23 +282,16 @@ html, body {
     background: #ffffff;
 }
 
-.button-form:hover {
+#submit-button:hover {
     background: #ebebeb;
 }
 
-.button-form:active {
+#submit-button:active {
     background: #cdcdcd;
 }
 
-.button-form:focus {
+#submit-button:focus {
     outline: 3px solid #afafaf;
-}
-
-.content-column-3 {
-    overflow: hidden;
-    padding: 0 5px;
-    text-align: justify;
-    column-count: 3;
 }
 
 .image-in-text {
@@ -324,7 +325,8 @@ html, body {
         max-width: calc(100% - 80px);
     }
     
-    .button-left, .button-right {
+    .button-left,
+    .button-right {
         width: 30px;
         height: 45px;
     }
@@ -357,7 +359,7 @@ html, body {
         padding: 5px 0 0 0;
     }
     
-    .button-form {
+    #submit-button {
         margin-left: 25%;
     }
 }
@@ -376,7 +378,8 @@ html, body {
         max-width: calc(100% - 50px);
     }
     
-    .button-left, .button-right {
+    .button-left,
+    .button-right {
         width: 20px;
         height: 30px;
     }
@@ -417,7 +420,7 @@ html, body {
         padding: 5px 0 0 0;
     }
     
-    .button-form {
+    #submit-button {
         margin-left: 30%;
     }
 }

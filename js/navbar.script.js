@@ -1,5 +1,5 @@
 // Show and hide navbar submenu
-let arrayNavbarElements = document.querySelectorAll('.top-navbar>ul>li');
+let arrayNavbarElements = document.querySelectorAll('.top-navbar > ul > li');
 
 arrayNavbarElements.forEach(function (elem) {
     elem.addEventListener('mouseover', showNavbarSubmenu, false);
@@ -19,7 +19,7 @@ function hideNavbarSubmenu() {
 }
 
 // Show and hide accordion blocks, when to do click on link menu
-let arrayLinksMenu = document.querySelectorAll('.menu>li>a');
+let arrayLinksMenu = document.querySelectorAll('.menu > li > a');
 
 arrayLinksMenu.forEach(function (elem) {
     elem.addEventListener('click', showAccordionBlocksBodyWhenChosenLink, false);
@@ -32,7 +32,7 @@ function showAccordionBlocksBodyWhenChosenLink() {
 }
 
 // Show slide, when to do click on link submenu
-let arrayLinkSubmenu = document.querySelectorAll('ul.menu>li>ul.submenu>li>a');
+let arrayLinkSubmenu = document.querySelectorAll('ul.menu > li > ul.submenu > li > a');
 
 arrayLinkSubmenu.forEach(function (elem) {
     elem.addEventListener('click', setSlideUsingSidebarLink, false);
@@ -43,7 +43,7 @@ function setSlideUsingSidebarLink() {
         targetSlide = Number(this.dataset.target),
         targetBlock = this.parentNode.parentNode.parentNode.querySelector('a').dataset.target;
 
-    document.querySelector(targetBlock + '>.block-header').click();
+    document.querySelector(targetBlock + ' > .block-header').click();
     stopTimer();
     arraySliderPaginationElements[targetSlide - 1].click();
     scrollImagesByTimer();

@@ -6,7 +6,7 @@
           name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Self Education</title>
-    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link href="img/favicon.png" rel="icon" type="image/x-icon">
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -35,8 +35,8 @@
             <div class="block-header active">
                 <h2>Home</h2>
             </div>
-            <div class="block-body show">
-                <div class="content-column-2">
+            <div class="block-body active">
+                <div class="text-column content-column-2">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut laoreet orci, a pharetra quam. Etiam
                     eu feugiat enim. Phasellus tincidunt quam interdum, tincidunt diam nec, faucibus magna. Aenean
                     turpis turpis, malesuada eget ex ut, condimentum vestibulum ipsum. Nam at hendrerit diam. Aliquam
@@ -62,7 +62,7 @@
             </div>
         </div>
         <!-- Tab of accordion -->
-
+        
         <!-- Tab of accordion -->
         <div class="block" id="register">
             <div class="block-header">
@@ -72,28 +72,28 @@
                 <form action="" class="form" id="register-form" method="post" novalidate>
                     <div class="form-group">
                         <label class="input-label" for="name">Name</label>
-                        <input class="input validation" id="name" type="text">
+                        <input class="input" id="name" name="name" type="text">
                         <span class="error-block">
                             *Please enter a valid name
                         </span>
                     </div>
                     <div class="form-group">
                         <label class="input-label" for="email">E-mail</label>
-                        <input class="input validation" id="email" type="email">
+                        <input class="input" id="email" name="email" type="email">
                         <span class="error-block">
                             *Please enter a valid email
                         </span>
                     </div>
                     <div class="form-group">
                         <label class="input-label" for="dob">Date of birth</label>
-                        <input class="input validation" id="dob" type="date">
+                        <input class="input" id="dob" name="dob" type="date">
                         <span class="error-block">
                             *Please enter a valid date of birth
                         </span>
                     </div>
                     <div class="form-group">
                         <label class="input-label" for="gender">Gender</label>
-                        <select class="input select" id="gender" name="">
+                        <select class="input select" id="gender" name="gender">
                             <option value="0">Male</option>
                             <option value="1">Female</option>
                             <option value="2">Other</option>
@@ -101,24 +101,24 @@
                     </div>
                     <div class="form-group">
                         <label class="input-label" for="married">Married</label>
-                        <input class="input checkbox" id="married" type="checkbox">
+                        <input class="input checkbox" id="married" name="married" type="checkbox">
                     </div>
                     <div class="form-group">
-                        <button class="button-form" id="submit-button" type="button">Register</button>
+                        <button id="submit-button" type="button">Register</button>
                     </div>
                 </form>
                 <pre id="result"></pre>
             </div>
         </div>
         <!-- Tab of accordion -->
-
+        
         <!-- Tab of accordion -->
         <div class="block" id="about">
             <div class="block-header">
                 <h2>About</h2>
             </div>
             <div class="block-body">
-                <div class="content-column-3">
+                <div class="text-column content-column-3">
                     <img alt="Image 1" class="image-in-text" id="image-animation-1" src="img/img-3.jpg">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis mi nec metus vestibulum
                        venenatis. Fusce urna ipsum, blandit eget ultrices sed, facilisis auctor arcu. Sed pellentesque
