@@ -81,7 +81,7 @@ function scrollImagesToRight() {
             dynamicArrayImages[i].style = '';
             dynamicArrayImages[i + 1].classList.add('active-slide');
             dynamicArrayImages[i + 1].style.maxWidth = dynamicArrayImages[i + 1].naturalWidth + 'px';
-                for (let j = 0; j < arrayImages.length; j++) {
+            for (let j = 0; j < arrayImages.length; j++) {
                 if (arrayImages[j] === dynamicArrayImages[i + 1]) {
                     setActiveElementSliderPagination(j);
                 }

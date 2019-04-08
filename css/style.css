@@ -195,11 +195,10 @@ html, body {
 }
 
 .form-group {
-    margin: 20px 0;
     display: flex;
     -webkit-flex-wrap: wrap; /* Safari */
-    
     flex-wrap: wrap;
+    margin: 20px 0;
 }
 
 .input-label {
@@ -212,12 +211,12 @@ html, body {
     display: inline-block;
     width: 20%;
     height: 25px;
+    margin: auto 0;
     padding: 5px 10px;
     font-size: 16px;
     border: 1px solid #696969;
     outline: none;
     background: #ffffff;
-    margin: auto 0;
 }
 
 .input:focus {
@@ -254,10 +253,10 @@ html, body {
 }
 
 .error-block {
-    color: #ff0000;
-    font-size: 16px;
     display: none;
     margin: auto auto auto 20px;
+    font-size: 16px;
+    color: #ff0000;
 }
 
 .error-block.visible {
@@ -266,13 +265,13 @@ html, body {
 
 .button-form {
     height: 37px;
+    margin: 20px auto auto 10%;
     padding: 5px 25px;
     font-size: 16px;
     cursor: pointer;
     border: 1px solid #696969;
     outline: none;
     background: #ffffff;
-    margin: 20px auto auto 10%;
 }
 
 .button-form:hover {
