@@ -197,6 +197,9 @@ html, body {
 .form-group {
     margin: 20px 0;
     display: flex;
+    -webkit-flex-wrap: wrap; /* Safari */
+    
+    flex-wrap: wrap;
 }
 
 .input-label {
@@ -240,6 +243,13 @@ html, body {
     padding: 0;
     cursor: pointer;
     border: none;
+}
+
+.error-block {
+    color: #ff0000;
+    font-size: 16px;
+    display: inline-block;
+    margin: auto auto auto 20px;
 }
 
 .button-form {
@@ -297,7 +307,7 @@ html, body {
     box-shadow: 20px 20px 20px 5px #696969;
 }
 
-@media screen and (min-width: 575px) and (max-width: 992px) {
+@media screen and (min-width: 575px) and (max-width: 1025px) {
     .slider-wrapper {
         /* Fix width block, because parent element div have 100% width and have 2 children button */
         max-width: calc(100% - 80px);
@@ -327,12 +337,29 @@ html, body {
         width: calc(40% + 20px + 2px);
     }
     
+    .checkbox {
+        width: 20px;
+    }
+    
+    .error-block {
+        margin: 0 0 0 25%;
+        padding: 5px 0 0 0;
+    }
+    
     .button-form {
         margin-left: 25%;
     }
 }
 
 @media screen and (max-width: 576px) {
+    .wrapper {
+        width: 98%;
+    }
+    
+    .block-body {
+        padding: 5px;
+    }
+    
     .slider-wrapper {
         /* Fix width block, because parent element div have 100% width and have 2 children button */
         max-width: calc(100% - 50px);
@@ -368,6 +395,15 @@ html, body {
         /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
            Element select don't calculate this parameters to width and height automatically */
         width: calc(60% + 20px + 2px);
+    }
+    
+    .checkbox {
+        width: 20px;
+    }
+    
+    .error-block {
+        margin: 0 0 0 30%;
+        padding: 5px 0 0 0;
     }
     
     .button-form {
