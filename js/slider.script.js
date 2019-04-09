@@ -6,7 +6,7 @@ let images = document.querySelectorAll('.slider-wrapper > img'),
     paginationContainer = document.querySelector('div.slider-pagination'),
     timerAutoSwitchSlide;
 
-window.addEventListener('load', callMultipleFunctions, false);
+window.addEventListener('load', onload, false);
 window.addEventListener('resize', resizeSlider, false);
 
 sliderContainer.addEventListener('mouseover', stopTimer, false);
@@ -18,7 +18,7 @@ paginationContainer.addEventListener('mouseout', scrollImagesByTimer, false);
 leftButton.addEventListener('click', scrollSlide, false);
 rightButton.addEventListener('click', scrollSlide, false);
 
-function callMultipleFunctions() {
+function onload() {
     generatePagination();
     setActiveClassSlide();
     resizeSlider();
@@ -41,8 +41,8 @@ function resizeSlider() {
             if (heightSlider < newImageHeight) {
                 heightSlider = newImageHeight;
             }
-        } else {
-            if (heightSlider < images[i].naturalHeight) heightSlider = images[i].naturalHeight;
+        } else if (heightSlider < images[i].naturalHeight) {
+            heightSlider = images[i].naturalHeight;
         }
     }
     
@@ -53,46 +53,35 @@ function scrollSlide() {
     let dynamicImagesList = document.querySelectorAll('.slider-wrapper > img');
     for (let i = 0; dynamicImagesList.length; i++) {
         if (dynamicImagesList[i].classList.contains('active')) {
-            if (i - 1 <= 0) {
-                moveImageInDOM('left', dynamicImagesList);
-            } else if (i + 1 === dynamicImagesList.length - 1) {
-                moveImageInDOM('right', dynamicImagesList);
-            }
-    
+            const scrollLeft = this.classList.contains('button-left');
+            const direction = scrollLeft ? 'left' : 'right';
+            const nextImageIndex = scrollLeft ? i - 1 : 1 + 1;
+            
+            moveImage(direction, dynamicImagesList);
             unsetActiveClassSlide(dynamicImagesList[i]);
+            
+            dynamicImagesList[nextImageIndex].classList.add('active');
+            dynamicImagesList[nextImageIndex].style.maxWidth = dynamicImagesList[nextImageIndex].naturalWidth + 'px';
     
-            if (this.classList.contains('button-left')) {
-                dynamicImagesList[i - 1].classList.add('active');
-                dynamicImagesList[i - 1].style.maxWidth = dynamicImagesList[i - 1].naturalWidth + 'px';
-    
-                for (let j = 0; j < images.length; j++) {
-                    if (images[j] === dynamicImagesList[i - 1]) {
-                        setActivePagination(j);
-                    }
-                }
-            } else if (this.classList.contains('button-right')) {
-                dynamicImagesList[i + 1].classList.add('active');
-                dynamicImagesList[i + 1].style.maxWidth = dynamicImagesList[i + 1].naturalWidth + 'px';
-    
-                for (let j = 0; j < images.length; j++) {
-                    if (images[j] === dynamicImagesList[i + 1]) {
-                        setActivePagination(j);
-                    }
+            for (let j = 0; j < images.length; j++) {
+                if (images[j] === dynamicImagesList[nextImageIndex]) {
+                    setActivePagination(j);
                 }
             }
+
             break;
         }
     }
 }
 
 function setActiveClassSlide() {
-    let isSlideActive = false; // HAS A REVERSE EFFECT!!!
+    let isSlideActive = false;
     
     if (images[0].classList.contains('active')) {
-        moveImageInDOM('left', images);
+        moveImage('left', images);
         setActivePagination(0);
     } else if (images[images.length - 1].classList.contains('active')) {
-        moveImageInDOM('right', images);
+        moveImage('right', images);
         setActivePagination(images.length - 1);
     } else {
         for (let i = 1; i < images.length - 1; i++) {
@@ -103,16 +92,16 @@ function setActiveClassSlide() {
             }
         }
         
-        if (!isSlideActive) { // (!isSlideActive)
+        if (isSlideActive === false || !isSlideActive) {
             images[0].classList.add('active');
         }
-        moveImageInDOM('left', images);
+        moveImage('left', images);
         setActivePagination(0);
     }
 }
 
-function moveImageInDOM(switchPosition, arraySlides) {
-    switch (switchPosition) {
+function moveImage(position, arraySlides) {
+    switch (position) {
         case 'left':
             sliderWrapper.insertBefore(arraySlides[arraySlides.length - 1], sliderWrapper.firstChild);
             break;
@@ -151,10 +140,10 @@ function switchImagePagination() {
     for (let i = 0; i < paginationButtons.length; i++) {
         if (paginationButtons[i].checked) {
             if (dynamicImagesList[0] === images[i]) {
-                moveImageInDOM('left', dynamicImagesList);
+                moveImage('left', dynamicImagesList);
                 setActiveClassSlidePagination(i);
             } else if (dynamicImagesList[dynamicImagesList.length - 1] === images[i]) {
-                moveImageInDOM('right', dynamicImagesList);
+                moveImage('right', dynamicImagesList);
                 setActiveClassSlidePagination(i);
             } else {
                 setActiveClassSlidePagination(i);
