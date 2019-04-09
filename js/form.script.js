@@ -1,62 +1,62 @@
-let buttonSubmitForm = document.getElementById('submit-button'),
-    inputIdName = document.getElementById('name'),
-    inputIdEmail = document.getElementById('email'),
-    inputIdDob = document.getElementById('dob'),
-    inputIdGender = document.getElementById('gender'),
-    inputIdMarried = document.getElementById('married'),
-    resultElement = document.getElementById('result');
+let submitFormButton = document.getElementById('submit-button'),
+    nameField = document.getElementById('name'),
+    emailField = document.getElementById('email'),
+    dobField = document.getElementById('dob'),
+    genderField = document.getElementById('gender'),
+    marriedField = document.getElementById('married'),
+    resultBlock = document.getElementById('result');
 
-buttonSubmitForm.addEventListener('click', validateForm, false);
+submitFormButton.addEventListener('click', validateForm, false);
 
 function validateForm() {
-    validateInputIdName() ? disableStyleError(inputIdName) : enableStyleError(inputIdName);
-    validateInputIdEmail() ? disableStyleError(inputIdEmail) : enableStyleError(inputIdEmail);
-    validateInputIdDob() ? disableStyleError(inputIdDob) : enableStyleError(inputIdDob);
+    validateNameField() ? disableErrorClass(nameField) : enableErrorClass(nameField);
+    validateEmailField() ? disableErrorClass(emailField) : enableErrorClass(emailField);
+    validateDobField() ? disableErrorClass(dobField) : enableErrorClass(dobField);
     
-    if (validateInputIdName() && validateInputIdEmail() && validateInputIdDob()) {
+    if (validateNameField() && validateEmailField() && validateDobField()) {
         outputFormInputValue();
         
-        clearInputField(inputIdName);
-        clearInputField(inputIdEmail);
-        clearInputField(inputIdDob);
+        clearInputField(nameField);
+        clearInputField(emailField);
+        clearInputField(dobField);
     } else {
-        resultElement.innerHTML = '';
+        resultBlock.innerHTML = '';
     }
 }
 
-function validateInputIdName() {
-    return /^[A-Z]{1}[a-z]{1,9}$/.test(inputIdName.value);
+function validateNameField() {
+    return /^[A-Z]{1}[a-z]{1,9}$/.test(nameField.value);
 }
 
-function validateInputIdEmail() {
-    return /^\w+@+\w{2,}.\w{2,}$/.test(inputIdEmail.value);
+function validateEmailField() {
+    return /^\w+@+\w{2,}.{1}\w{2,}$/.test(emailField.value);
 }
 
-function validateInputIdDob() {
-    let dateOfInput = new Date(inputIdDob.value),
+function validateDobField() {
+    let inputDate = new Date(dobField.value),
         currentDate = new Date();
     
-    return dateOfInput.getFullYear() >= currentDate.getFullYear() - 100;
+    return inputDate.getFullYear() >= currentDate.getFullYear() - 100;
 }
 
 function outputFormInputValue() {
     let stringResult = '';
     
-    stringResult = stringResult + 'Name: ' + inputIdName.value + '\n';
-    stringResult = stringResult + 'Email: ' + inputIdEmail.value + '\n';
-    stringResult = stringResult + 'Date of birth: ' + inputIdDob.value + '\n';
-    stringResult = stringResult + 'Gender: ' + inputIdGender.value + '\n';
-    stringResult = stringResult + 'Married: ' + inputIdMarried.checked + '\n';
+    stringResult = stringResult + 'Name: ' + nameField.value + '\n';
+    stringResult = stringResult + 'Email: ' + emailField.value + '\n';
+    stringResult = stringResult + 'Date of birth: ' + dobField.value + '\n';
+    stringResult = stringResult + 'Gender: ' + genderField.value + '\n';
+    stringResult = stringResult + 'Married: ' + marriedField.checked + '\n';
     
-    resultElement.innerText = stringResult;
+    resultBlock.innerText = stringResult;
 }
 
-function enableStyleError(element) {
+function enableErrorClass(element) {
     element.nextElementSibling.classList.add('visible');
     element.classList.add('invalid');
 }
 
-function disableStyleError(element) {
+function disableErrorClass(element) {
     element.nextElementSibling.classList.remove('visible');
     element.classList.remove('invalid');
 }

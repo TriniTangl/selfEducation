@@ -1,208 +1,206 @@
-let arrayImages = document.querySelectorAll('.slider-wrapper > img'),
-    buttonLeft = document.querySelector('button.button-left'),
-    buttonRight = document.querySelector('button.button-right'),
+let images = document.querySelectorAll('.slider-wrapper > img'),
+    leftButton = document.querySelector('button.button-left'),
+    rightButton = document.querySelector('button.button-right'),
     sliderWrapper = document.querySelector('div.slider-wrapper'),
     sliderContainer = document.querySelector('div.slider-container'),
-    sliderPaginationContainer = document.querySelector('div.slider-pagination'),
-    timerForAutoSwitchImages;
+    paginationContainer = document.querySelector('div.slider-pagination'),
+    timerAutoSwitchSlide;
 
-window.addEventListener('load', callFunctionForOnloadEventWindow, false);
-window.addEventListener('resize', autoResizeSliderArea, false);
+window.addEventListener('load', callMultipleFunctions, false);
+window.addEventListener('resize', resizeSlider, false);
 
 sliderContainer.addEventListener('mouseover', stopTimer, false);
 sliderContainer.addEventListener('mouseout', scrollImagesByTimer, false);
 
-sliderPaginationContainer.addEventListener('mouseover', stopTimer, false);
-sliderPaginationContainer.addEventListener('mouseout', scrollImagesByTimer, false);
+paginationContainer.addEventListener('mouseover', stopTimer, false);
+paginationContainer.addEventListener('mouseout', scrollImagesByTimer, false);
 
-buttonLeft.addEventListener('click', scrollImagesToLeft, false);
-buttonRight.addEventListener('click', scrollImagesToRight, false);
+leftButton.addEventListener('click', scrollSlide, false);
+rightButton.addEventListener('click', scrollSlide, false);
 
-function callFunctionForOnloadEventWindow() {
-    generateSliderPagination();
-    setClassActiveSlideForImageWhenPageLoad();
-    autoResizeSliderArea();
+function callMultipleFunctions() {
+    generatePagination();
+    setActiveClassSlide();
+    resizeSlider();
     scrollImagesByTimer();
 }
 
-function autoResizeSliderArea() {
-    let widthButtonSlider = buttonLeft.offsetWidth,
-        marginSideButtonSlider = Number(window.getComputedStyle(buttonLeft).marginRight.replace(/\D+/g, '')),
-        widthSliderArea = sliderContainer.offsetWidth - ((widthButtonSlider + marginSideButtonSlider) * 2),
-        heightSliderArea = 0;
+function resizeSlider() {
+    let widthButtonsSlider = leftButton.offsetWidth,
+        marginButtonsSlider = Number(window.getComputedStyle(leftButton).marginRight.replace(/\D+/g, '')),
+        widthSlider = sliderContainer.offsetWidth - ((widthButtonsSlider + marginButtonsSlider) * 2),
+        heightSlider = 0;
     
-    for (let i = 0; i < arrayImages.length; i++) {
-        if (arrayImages[i].naturalWidth > widthSliderArea) {
-            let newImageNaturalHeight, coefficient;
+    for (let i = 0; i < images.length; i++) {
+        if (images[i].naturalWidth > widthSlider) {
+            let newImageHeight, coefficient;
             
-            coefficient = widthSliderArea / arrayImages[i].naturalWidth;
-            newImageNaturalHeight = arrayImages[i].naturalHeight * coefficient;
+            coefficient = widthSlider / images[i].naturalWidth;
+            newImageHeight = images[i].naturalHeight * coefficient;
             
-            if (heightSliderArea < newImageNaturalHeight) heightSliderArea = newImageNaturalHeight;
+            if (heightSlider < newImageHeight) {
+                heightSlider = newImageHeight;
+            }
         } else {
-            if (heightSliderArea < arrayImages[i].naturalHeight) heightSliderArea = arrayImages[i].naturalHeight;
+            if (heightSlider < images[i].naturalHeight) heightSlider = images[i].naturalHeight;
         }
     }
     
-    sliderWrapper.style.height = Math.round(heightSliderArea) + 'px';
+    sliderWrapper.style.height = Math.round(heightSlider) + 'px';
 }
 
-function scrollImagesToLeft() {
-    let dynamicArrayImages = document.querySelectorAll('.slider-wrapper > img');
-    for (let i = 0; i < dynamicArrayImages.length; i++) {
-        if (dynamicArrayImages[i].classList.contains('active-slide')) {
+function scrollSlide() {
+    let dynamicImagesList = document.querySelectorAll('.slider-wrapper > img');
+    for (let i = 0; dynamicImagesList.length; i++) {
+        if (dynamicImagesList[i].classList.contains('active')) {
             if (i - 1 <= 0) {
-                changePlaceImageInSliderList('left', dynamicArrayImages);
+                moveImageInDOM('left', dynamicImagesList);
+            } else if (i + 1 === dynamicImagesList.length - 1) {
+                moveImageInDOM('right', dynamicImagesList);
             }
-            
-            dynamicArrayImages[i].classList.remove('active-slide');
-            dynamicArrayImages[i].style = '';
-            dynamicArrayImages[i - 1].classList.add('active-slide');
-            dynamicArrayImages[i - 1].style.maxWidth = dynamicArrayImages[i - 1].naturalWidth + 'px';
-            for (let j = 0; j < arrayImages.length; j++) {
-                if (arrayImages[j] === dynamicArrayImages[i - 1]) {
-                    setActiveElementSliderPagination(j);
-                }
-            }
-            break;
-        }
-    }
-}
-
-function scrollImagesToRight() {
-    let dynamicArrayImages = document.querySelectorAll('.slider-wrapper > img');
-    for (let i = dynamicArrayImages.length - 1; i >= 0; i--) {
-        if (dynamicArrayImages[i].classList.contains('active-slide')) {
-            if (i + 1 === dynamicArrayImages.length - 1) {
-                changePlaceImageInSliderList('right', dynamicArrayImages);
-            }
-            
-            dynamicArrayImages[i].classList.remove('active-slide');
-            dynamicArrayImages[i].style = '';
-            dynamicArrayImages[i + 1].classList.add('active-slide');
-            dynamicArrayImages[i + 1].style.maxWidth = dynamicArrayImages[i + 1].naturalWidth + 'px';
-            for (let j = 0; j < arrayImages.length; j++) {
-                if (arrayImages[j] === dynamicArrayImages[i + 1]) {
-                    setActiveElementSliderPagination(j);
-                }
-            }
-            break;
-        }
-    }
-}
-
-function setClassActiveSlideForImageWhenPageLoad() {
-    let isElementHaveClass = false; // HAS A REVERSE EFFECT!!!
     
-    if (arrayImages[0].classList.contains('active-slide')) {
-        changePlaceImageInSliderList('left', arrayImages);
-        setActiveElementSliderPagination(0);
-    } else if (arrayImages[arrayImages.length - 1].classList.contains('active-slide')) {
-        changePlaceImageInSliderList('right', arrayImages);
-        setActiveElementSliderPagination(arrayImages.length - 1);
+            unsetActiveClassSlide(dynamicImagesList[i]);
+    
+            if (this.classList.contains('button-left')) {
+                dynamicImagesList[i - 1].classList.add('active');
+                dynamicImagesList[i - 1].style.maxWidth = dynamicImagesList[i - 1].naturalWidth + 'px';
+    
+                for (let j = 0; j < images.length; j++) {
+                    if (images[j] === dynamicImagesList[i - 1]) {
+                        setActivePagination(j);
+                    }
+                }
+            } else if (this.classList.contains('button-right')) {
+                dynamicImagesList[i + 1].classList.add('active');
+                dynamicImagesList[i + 1].style.maxWidth = dynamicImagesList[i + 1].naturalWidth + 'px';
+    
+                for (let j = 0; j < images.length; j++) {
+                    if (images[j] === dynamicImagesList[i + 1]) {
+                        setActivePagination(j);
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+function setActiveClassSlide() {
+    let isSlideActive = false; // HAS A REVERSE EFFECT!!!
+    
+    if (images[0].classList.contains('active')) {
+        moveImageInDOM('left', images);
+        setActivePagination(0);
+    } else if (images[images.length - 1].classList.contains('active')) {
+        moveImageInDOM('right', images);
+        setActivePagination(images.length - 1);
     } else {
-        for (let i = 1; i < arrayImages.length - 1; i++) {
-            if (arrayImages[i].classList.contains('active-slide')) {
-                setActiveElementSliderPagination(i);
-                isElementHaveClass = true;
+        for (let i = 1; i < images.length - 1; i++) {
+            if (images[i].classList.contains('active')) {
+                setActivePagination(i);
+                isSlideActive = true;
                 break;
             }
         }
         
-        if (!isElementHaveClass) { // (!isElementHaveClass)
-            arrayImages[0].classList.add('active-slide');
+        if (!isSlideActive) { // (!isSlideActive)
+            images[0].classList.add('active');
         }
-        changePlaceImageInSliderList('left', arrayImages);
-        setActiveElementSliderPagination(0);
+        moveImageInDOM('left', images);
+        setActivePagination(0);
     }
 }
 
-function changePlaceImageInSliderList(switchPosition, arrayElements) {
+function moveImageInDOM(switchPosition, arraySlides) {
     switch (switchPosition) {
         case 'left':
-            sliderWrapper.insertBefore(arrayElements[arrayElements.length - 1], sliderWrapper.firstChild);
+            sliderWrapper.insertBefore(arraySlides[arraySlides.length - 1], sliderWrapper.firstChild);
             break;
         case 'right':
-            sliderWrapper.insertBefore(arrayElements[0], null);
+            sliderWrapper.insertBefore(arraySlides[0], null);
             break;
         default:
             break;
     }
 }
 
-function generateSliderPagination() {
+function generatePagination() {
     let elementPagination = document.createElement('input');
     
-    elementPagination.classList.add('slider-switch');
-    elementPagination.name = 'slider-switch-button';
+    elementPagination.classList.add('pagination-button');
+    elementPagination.name = 'slider-switch';
     elementPagination.type = 'radio';
-    for (let i = 0; i < arrayImages.length; i++) {
+    for (let i = 0; i < images.length; i++) {
         let temp = elementPagination.cloneNode(true);
         
-        temp.addEventListener('click', switchImageUsingSliderPagination, false);
-        sliderPaginationContainer.appendChild(temp);
+        temp.addEventListener('click', switchImagePagination, false);
+        paginationContainer.appendChild(temp);
     }
 }
 
-function setActiveElementSliderPagination(position) {
-    let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch');
+function setActivePagination(position) {
+    let paginationButtons = document.querySelectorAll('input.pagination-button');
     
-    arraySliderPaginationElements[position].checked = true;
+    paginationButtons[position].checked = true;
 }
 
-function switchImageUsingSliderPagination() {
-    let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch'),
-        dynamicArrayImages = document.querySelectorAll('.slider-wrapper > img');
+function switchImagePagination() {
+    let paginationButtons = document.querySelectorAll('input.pagination-button'),
+        dynamicImagesList = document.querySelectorAll('.slider-wrapper > img');
     
-    for (let i = 0; i < arraySliderPaginationElements.length; i++) {
-        if (arraySliderPaginationElements[i].checked) {
-            if (dynamicArrayImages[0] === arrayImages[i]) {
-                changePlaceImageInSliderList('left', dynamicArrayImages);
-                setClassActiveSlideForImageUsingSliderPagination(i);
-            } else if (dynamicArrayImages[dynamicArrayImages.length - 1] === arrayImages[i]) {
-                changePlaceImageInSliderList('right', dynamicArrayImages);
-                setClassActiveSlideForImageUsingSliderPagination(i);
+    for (let i = 0; i < paginationButtons.length; i++) {
+        if (paginationButtons[i].checked) {
+            if (dynamicImagesList[0] === images[i]) {
+                moveImageInDOM('left', dynamicImagesList);
+                setActiveClassSlidePagination(i);
+            } else if (dynamicImagesList[dynamicImagesList.length - 1] === images[i]) {
+                moveImageInDOM('right', dynamicImagesList);
+                setActiveClassSlidePagination(i);
             } else {
-                setClassActiveSlideForImageUsingSliderPagination(i);
+                setActiveClassSlidePagination(i);
             }
         }
     }
 }
 
-function setClassActiveSlideForImageUsingSliderPagination(position) {
-    for (let i = 0; i < arrayImages.length; i++) {
-        arrayImages[i].classList.remove('active-slide');
-        arrayImages[i].style = '';
+function setActiveClassSlidePagination(position) {
+    for (let i = 0; i < images.length; i++) {
+        unsetActiveClassSlide(images[i]);
     }
-    arrayImages[position].classList.add('active-slide');
-    arrayImages[position].style.maxWidth = arrayImages[position].naturalWidth + 'px';
+    images[position].classList.add('active');
+    images[position].style.maxWidth = images[position].naturalWidth + 'px';
 }
 
 function scrollImagesByTimer() {
-    let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch'),
+    let paginationButtons = document.querySelectorAll('input.pagination-button'),
         iterator;
     
-    for (let i = 0; i < arraySliderPaginationElements.length; i++) {
-        if (arraySliderPaginationElements[i].checked) {
+    for (let i = 0; i < paginationButtons.length; i++) {
+        if (paginationButtons[i].checked) {
             iterator = i;
             break;
         }
     }
     
-    timerForAutoSwitchImages = setTimeout(tick, 2000);
+    timerAutoSwitchSlide = setTimeout(tick, 2000);
     
     function tick() {
-        arraySliderPaginationElements[iterator].click();
+        paginationButtons[iterator].click();
         
-        if (iterator === arraySliderPaginationElements.length - 1) {
+        if (iterator === paginationButtons.length - 1) {
             iterator = 0;
         } else {
             iterator++;
         }
-        timerForAutoSwitchImages = setTimeout(tick, 2000);
+        timerAutoSwitchSlide = setTimeout(tick, 2000);
     }
 }
 
 function stopTimer() {
-    clearTimeout(timerForAutoSwitchImages);
+    clearTimeout(timerAutoSwitchSlide);
+}
+
+function unsetActiveClassSlide(slide) {
+    slide.classList.remove('active');
+    slide.style = '';
 }

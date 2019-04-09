@@ -1,50 +1,49 @@
-// Show and hide navbar submenu
-let arrayNavbarElements = document.querySelectorAll('.top-navbar > ul > li');
+let navbarElements = document.querySelectorAll('.top-navbar > ul > li'),
+    menuLinks = document.querySelectorAll('.menu > li > a'),
+    submenuLinks = document.querySelectorAll('ul.menu > li > ul.submenu > li > a');
 
-arrayNavbarElements.forEach(function (elem) {
+navbarElements.forEach(function (elem) {
     elem.addEventListener('mouseover', showNavbarSubmenu, false);
     elem.addEventListener('mouseout', hideNavbarSubmenu, false);
+});
+
+menuLinks.forEach(function (elem) {
+    elem.addEventListener('click', chooseAccordionTab, false);
+});
+
+submenuLinks.forEach(function (elem) {
+    elem.addEventListener('click', chooseSlide, false);
 });
 
 function showNavbarSubmenu() {
     let submenu = this.querySelector('ul');
     
-    if (submenu) submenu.classList.add('hover');
+    if (submenu) {
+        submenu.classList.add('visible');
+    }
 }
 
 function hideNavbarSubmenu() {
     let submenu = this.querySelector('ul');
     
-    if (submenu) submenu.classList.remove('hover');
+    if (submenu) {
+        submenu.classList.remove('visible');
+    }
 }
 
-// Show and hide accordion blocks, when to do click on link menu
-let arrayLinksMenu = document.querySelectorAll('.menu > li > a');
-
-arrayLinksMenu.forEach(function (elem) {
-    elem.addEventListener('click', showAccordionBlocksBodyWhenChosenLink, false);
-});
-
-function showAccordionBlocksBodyWhenChosenLink() {
+function chooseAccordionTab() {
     let targetBlock = this.dataset.target;
     
-    document.querySelector(targetBlock + '>.block-header').click();
+    document.querySelector(targetBlock + ' > .block-header').click();
 }
 
-// Show slide, when to do click on link submenu
-let arrayLinkSubmenu = document.querySelectorAll('ul.menu > li > ul.submenu > li > a');
-
-arrayLinkSubmenu.forEach(function (elem) {
-    elem.addEventListener('click', setSlideUsingSidebarLink, false);
-});
-
-function setSlideUsingSidebarLink() {
-    let arraySliderPaginationElements = document.querySelectorAll('input.slider-switch'),
+function chooseSlide() {
+    let paginationButtons = document.querySelectorAll('input.pagination-button'),
         targetSlide = Number(this.dataset.target),
-        targetBlock = this.parentNode.parentNode.parentNode.querySelector('a').dataset.target;
+        targetBlock = this.parentNode.parentNode.previousElementSibling.dataset.target;
 
     document.querySelector(targetBlock + ' > .block-header').click();
     stopTimer();
-    arraySliderPaginationElements[targetSlide - 1].click();
+    paginationButtons[targetSlide - 1].click();
     scrollImagesByTimer();
 }
