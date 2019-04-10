@@ -92,7 +92,7 @@ function setActiveClassSlide() {
             }
         }
         
-        if (isSlideActive === false || !isSlideActive) {
+        if (isSlideActive === false) {
             images[0].classList.add('active');
         }
         moveImage('left', images);
@@ -141,13 +141,11 @@ function switchImagePagination() {
         if (paginationButtons[i].checked) {
             if (dynamicImagesList[0] === images[i]) {
                 moveImage('left', dynamicImagesList);
-                setActiveClassSlidePagination(i);
             } else if (dynamicImagesList[dynamicImagesList.length - 1] === images[i]) {
                 moveImage('right', dynamicImagesList);
-                setActiveClassSlidePagination(i);
-            } else {
-                setActiveClassSlidePagination(i);
             }
+    
+            setActiveClassSlidePagination(i);
         }
     }
 }

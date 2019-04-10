@@ -34,6 +34,9 @@ function hideNavbarSubmenu() {
 function chooseAccordionTab() {
     let targetBlock = this.dataset.target;
     
+    unsetActiveClassLinks();
+    
+    this.parentNode.classList.add('active');
     document.querySelector(targetBlock + ' > .block-header').click();
 }
 
@@ -41,9 +44,18 @@ function chooseSlide() {
     let paginationButtons = document.querySelectorAll('input.pagination-button'),
         targetSlide = Number(this.dataset.target),
         targetBlock = this.parentNode.parentNode.previousElementSibling.dataset.target;
-
+    
+    unsetActiveClassLinks();
+    
+    this.parentNode.parentNode.parentNode.classList.add('active');
     document.querySelector(targetBlock + ' > .block-header').click();
     stopTimer();
     paginationButtons[targetSlide - 1].click();
     scrollImagesByTimer();
+}
+
+function unsetActiveClassLinks() {
+    navbarElements.forEach(function (element) {
+        element.classList.remove('active');
+    });
 }

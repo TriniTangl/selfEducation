@@ -39,6 +39,10 @@ body {
     background: #c3c3c3;
 }
 
+.top-navbar li.active {
+    background: #c3c3c3;
+}
+
 .top-navbar li a:active {
     background: #afafaf;
 }
@@ -209,13 +213,14 @@ body {
     margin: 20px 0;
 }
 
-.input-label {
+.form-group label {
     display: inline-block;
     width: 10%;
     margin: auto 0;
 }
 
-.input {
+.form-group input,
+.form-group select {
     display: inline-block;
     width: 20%;
     height: 25px;
@@ -227,19 +232,22 @@ body {
     background: #ffffff;
 }
 
-.input:focus {
+.form-group input:focus,
+.form-group select:focus {
     outline: 3px solid #afafaf;
 }
 
-.input.invalid {
+.form-group input.invalid,
+.form-group select.invalid {
     border: 1px solid #ff0000;
 }
 
-.input.invalid:focus {
+.form-group input.invalid:focus,
+.form-group select.invalid:focus {
     outline: 3px solid #ff0000;
 }
 
-.select {
+.form-group select {
     /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
        Element select don't calculate this parameters to width and height automatically */
     width: calc(20% + 20px + 2px);
@@ -252,7 +260,7 @@ body {
     appearance: none;
 }
 
-.checkbox {
+.form-group input[type = "checkbox"] {
     width: 20px;
     height: 20px;
     padding: 0;
@@ -336,21 +344,22 @@ body {
         padding-left: 20px;
     }
     
-    .input-label {
+    .form-group label {
         width: 25%;
     }
     
-    .input {
+    .form-group input,
+    .form-group select {
         width: 40%;
     }
     
-    .select {
+    .form-group select {
         /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
            Element select don't calculate this parameters to width and height automatically */
         width: calc(40% + 20px + 2px);
     }
     
-    .checkbox {
+    .form-group input[type = "checkbox"] {
         width: 20px;
     }
     
@@ -397,21 +406,22 @@ body {
         padding-left: 0;
     }
     
-    .input-label {
+    .form-group label {
         width: 30%;
     }
     
-    .input {
+    .form-group input,
+    .form-group select {
         width: 60%;
     }
     
-    .select {
+    .form-group select {
         /* Fix width and height select, because input element have 10px and 5px padding's and 1px borders
            Element select don't calculate this parameters to width and height automatically */
         width: calc(60% + 20px + 2px);
     }
     
-    .checkbox {
+    .form-group input[type = "checkbox"] {
         width: 20px;
     }
     

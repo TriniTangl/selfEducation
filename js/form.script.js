@@ -9,11 +9,15 @@ let submitFormButton = document.getElementById('submit-button'),
 submitFormButton.addEventListener('click', validateForm, false);
 
 function validateForm() {
-    validateNameField() ? disableErrorClass(nameField) : enableErrorClass(nameField);
-    validateEmailField() ? disableErrorClass(emailField) : enableErrorClass(emailField);
-    validateDobField() ? disableErrorClass(dobField) : enableErrorClass(dobField);
+    let nameIsValid = /^[\D]{1,10}$/.test(nameField.value),
+        emailIsValid = /^\w+@+\w{2,}.{1}\w{2,}$/.test(emailField.value),
+        dateIsValid = new Date(dobField.value).getFullYear() >= new Date().getFullYear() - 100;
     
-    if (validateNameField() && validateEmailField() && validateDobField()) {
+    nameIsValid ? disableErrorClass(nameField) : enableErrorClass(nameField);
+    emailIsValid ? disableErrorClass(emailField) : enableErrorClass(emailField);
+    dateIsValid ? disableErrorClass(dobField) : enableErrorClass(dobField);
+    
+    if (nameIsValid && emailIsValid && dateIsValid) {
         outputFormInputValue();
         
         clearInputField(nameField);
@@ -24,31 +28,13 @@ function validateForm() {
     }
 }
 
-function validateNameField() {
-    return /^[A-Z]{1}[a-z]{1,9}$/.test(nameField.value);
-}
-
-function validateEmailField() {
-    return /^\w+@+\w{2,}.{1}\w{2,}$/.test(emailField.value);
-}
-
-function validateDobField() {
-    let inputDate = new Date(dobField.value),
-        currentDate = new Date();
-    
-    return inputDate.getFullYear() >= currentDate.getFullYear() - 100;
-}
-
 function outputFormInputValue() {
-    let stringResult = '';
-    
-    stringResult = stringResult + 'Name: ' + nameField.value + '\n';
-    stringResult = stringResult + 'Email: ' + emailField.value + '\n';
-    stringResult = stringResult + 'Date of birth: ' + dobField.value + '\n';
-    stringResult = stringResult + 'Gender: ' + genderField.value + '\n';
-    stringResult = stringResult + 'Married: ' + marriedField.checked + '\n';
-    
-    resultBlock.innerText = stringResult;
+    resultBlock.innerText =
+        `Name: ${nameField.value}\n` +
+        `Email: ${emailField.value}\n` +
+        `Date of birth: ${dobField.value}\n` +
+        `Gender: ${genderField.value}\n` +
+        `Married: ${marriedField.checked}`;
 }
 
 function enableErrorClass(element) {
